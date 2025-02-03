@@ -3,7 +3,7 @@ Import-Module ActiveDirectory
 
 # Define CSV file path and log file
 $CSVPath = "C:\temp\UsersToDisable.csv"
-$LogFile = "C:\temp\AD-UserDisable.log"
+$LogFile = "C:\temp\logs\AD-UserDisable.log"
 
 # Function to log actions
 function Write-Log {

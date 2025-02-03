@@ -32,8 +32,8 @@ foreach ($User in $ADUsers) {
 
             # Loop through eac hattribute to compare and log changes
             $FieldsToUpdate = @{
-                Name                = "$($User.firstname) $($User.lastname)"
-                GivenName      = $User.firstname
+                Name          = "$($User.firstname) $($User.lastname)"
+                GivenName     = $User.firstname
                 Surname       = $User.lastname
                 Initials      = $User.initials
                 DisplayName   = "$($User.firstname) $($User.lastname)"
@@ -56,12 +56,12 @@ foreach ($User in $ADUsers) {
                 # Check if value needs updating
                 if ($NewValue -and ($OldValue -ne $NewValue)) {
                     $UserParams[$Field] = $NewValue
-                    $Changes[$Field] = "Changed from '$OldValue' to '$NewValue'"
+                    $Changes[$Field] = "Changed $Field from '$OldValue' to '$NewValue'"
                 }
             }
 
             if ($Changes.Count -gt 0) {
-                Set-ADUser @UserParams
+                Set-ADUser $User.username @UserParams
 
                 Write-Host "Updated $($User.username): $($Changes.Values -join ', ')" -ForegroundColor Green
                 Write-Log "Updated $($User.username): $($Changes.Values -join ', ')"
